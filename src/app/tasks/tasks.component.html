@@ -1,0 +1,17 @@
+<table class="table">
+    <thead>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Ações</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let task of tasks"> <!-- NFor loop do Angular, "let" declara variável local em typescript -->
+            <td>{{ task.id }}</td>
+            <td>{{ task.title }}</td>
+            <td>
+                <button class="btn btn-info">Detalhes</button>  <!-- info no bootstrap é um botão azul -->
+                <button class="btn btn-danger">Excluir</button>  <!-- danger no bootstrap é um botão vermelho -->
+            </td>
+        </tr>
+    </tbody>
+</table>
