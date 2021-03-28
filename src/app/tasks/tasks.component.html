@@ -9,9 +9,43 @@
             <td>{{ task.id }}</td>
             <td>{{ task.title }}</td>
             <td>
-                <button class="btn btn-info">Detalhes</button>  <!-- info no bootstrap é um botão azul -->
-                <button class="btn btn-danger">Excluir</button>  <!-- danger no bootstrap é um botão vermelho -->
+                <button class="btn btn-info" data-toggle="modal" data-target="#taskDetailModal" (click)="onSelect(task)">
+                    <span class="glyphicon glyphicon-info-sign"></span> <!-- componente Glyphicon do bootstrap -->
+                    Detalhes
+                </button>  <!-- info no bootstrap é um botão azul -->
+                <button class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash"></span> 
+                    Excluir
+                </button>  <!-- danger no bootstrap é um botão vermelho -->
             </td>
         </tr>
     </tbody>
 </table>
+
+<div *ngIf="selectedTask">          <!-- diretiva ngIf só apresenta a div se já existe valor atribuído a selectedTask -->
+    <p >
+        <strong>ID: </strong> {{ selectedTask.id }}
+    </p>
+    <p>
+        <strong>Título: </strong> {{ selectedTask.title }}
+    </p>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="taskDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" *ngIf="selectedTask">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Detalhes da Tarefa: {{ selectedTask.title }}</h4>
+        </div>
+        <div class="modal-body">
+            <input [(ngModel)]="selectedTask.title" class="form-control" type="text">   <!-- [()] two way data bind -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+</div>
