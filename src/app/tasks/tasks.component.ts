@@ -1,8 +1,12 @@
+// Primeiramente importamos os módulos do framework
 import { Component, OnInit } from '@angular/core';      // importação do decorator Component do Angular
                                         // OnInit é uma Interface do Angular, portanto existe um contrato
                                         // que nos exige definir alguns métodos.
 
-const TASKS: Array<any> = [
+// Em seguida importamos os módulos do nosso projeto
+import { Task } from './shared/task.model'
+
+const TASKS: Array<Task> = [
     {id: 1, title: 'Fazer tarefa 1'},
     {id: 2, title: 'Fazer tarefa 2'},
     {id: 3, title: 'Fazer tarefa 3'},
