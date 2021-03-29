@@ -5,31 +5,34 @@ import { Component, OnInit } from '@angular/core';      // importação do decor
 
 // Em seguida importamos os módulos do nosso projeto
 import { Task } from './shared/task.model'
+import { TaskService } from './shared/task.service';
 
-const TASKS: Array<Task> = [
-    {id: 1, title: 'Fazer tarefa 1'},
-    {id: 2, title: 'Fazer tarefa 2'},
-    {id: 3, title: 'Fazer tarefa 3'},
-    {id: 4, title: 'Fazer tarefa 4'},
-    {id: 5, title: 'Fazer tarefa 5'},
-    {id: 6, title: 'Fazer tarefa 6'},
-    {id: 7, title: 'Fazer tarefa 7'},
-]
-                                        
 @Component({
     selector: 'tasks',
-    templateUrl: './tasks.component.html'
+    templateUrl: './tasks.component.html',
+    // providers: [
+    //   { provide: TaskService, useClass: TaskService } // quando alguém perguntar por TaskService (provide),
+    //                                                     // responda com TaskService (useClass)
+    // ]
+    providers: [ TaskService ]    // como provide=useClass, simplifico
 })
 
 export class TasksComponent implements OnInit{
-    public tasks;
+    public tasks: Array<Task>;
     public selectedTask: Task;
 
-    public constructor(){
-    }
-    
+    // private taskService: TaskService;
+
+    // public constructor(taskService: TaskService){   // no construtor, eu declaro os Serviços que irei importar
+    //   this.taskService = taskService;
+    // }
+
+    // Simplificando o que estava acima:
+    public constructor(private taskService: TaskService){} // typescript permite declarar um atributo privato
+                                                          // associado ao parâmetro do construtor
+
     public ngOnInit(){
-        this.tasks = TASKS;
+      this.tasks = this.taskService.getTask()   // utilizo o método getTask do serviço taskService
     }
 
     public onSelect(task: Task): void {
