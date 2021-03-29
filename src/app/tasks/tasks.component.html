@@ -14,7 +14,7 @@
                     Detalhes
                 </button>  <!-- info no bootstrap é um botão azul -->
                 <button class="btn btn-danger">
-                    <span class="glyphicon glyphicon-trash"></span> 
+                    <span class="glyphicon glyphicon-trash"></span>
                     Excluir
                 </button>  <!-- danger no bootstrap é um botão vermelho -->
             </td>
@@ -22,30 +22,5 @@
     </tbody>
 </table>
 
-<div *ngIf="selectedTask">          <!-- diretiva ngIf só apresenta a div se já existe valor atribuído a selectedTask -->
-    <p >
-        <strong>ID: </strong> {{ selectedTask.id }}
-    </p>
-    <p>
-        <strong>Título: </strong> {{ selectedTask.title }}
-    </p>
-</div>
+<task-detail [task]="selectedTask"></task-detail>   <!-- a propriedade task do task-detail recebe o valor selectedTask -->
 
-<!-- Modal -->
-<div class="modal fade" id="taskDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" *ngIf="selectedTask">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Detalhes da Tarefa: {{ selectedTask.title }}</h4>
-        </div>
-        <div class="modal-body">
-            <input [(ngModel)]="selectedTask.title" class="form-control" type="text">   <!-- [()] two way data bind -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-</div>
