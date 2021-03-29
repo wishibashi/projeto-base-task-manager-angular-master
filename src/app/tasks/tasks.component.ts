@@ -32,7 +32,9 @@ export class TasksComponent implements OnInit{
                                                           // associado ao parâmetro do construtor
 
     public ngOnInit(){
-      this.tasks = this.taskService.getTask()   // utilizo o método getTask do serviço taskService
+      this.taskService.getTasks()   // utilizo o método getTask do serviço taskService
+        .then((tasks) => this.tasks = tasks )
+        .catch((error_msg) => alert(error_msg)); // como a function só tem uma linha
     }
 
     public onSelect(task: Task): void {

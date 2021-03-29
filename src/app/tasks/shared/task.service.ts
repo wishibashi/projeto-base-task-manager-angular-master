@@ -10,12 +10,23 @@ const TASKS: Array<Task> = [
   {id: 5, title: 'Fazer tarefa 5'},
   {id: 6, title: 'Fazer tarefa 6'},
   {id: 7, title: 'Fazer tarefa 7'},
-]
+];
 
 @Injectable()
 
 export class TaskService{
-  public getTask(): Array<Task>{
-    return TASKS
+
+  public getTasks(): Promise<Task[]>{
+    let promise = new Promise<Task[]>((resolve, reject) => {
+    // funções anonimas: notação arrow (=>) function, seria Promise<Task[]>(function(resolve, reject) {
+        if (TASKS.length > 0){
+        resolve(TASKS);
+      }else{
+        let error_msg = "NAO HA TAREFAS";
+        reject(error_msg);
+      }
+    });
+    return promise;
   }
+
 }
