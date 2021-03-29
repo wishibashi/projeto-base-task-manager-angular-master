@@ -8,13 +8,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Task Manager</a>
+      <a class="navbar-brand" routerLink="/">Task Manager</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#">Dashboard</a></li>
+        <li><a routerLink="/dashboard">Dashboard</a></li>
         <!-- routerLink define href como sendo domínio+routerLink,
         se usarmos [routerLink]="['a', 'b', 'c']" => dominio/a/b/c -->
         <li><a routerLink="/tasks">Tarefas</a></li> 
