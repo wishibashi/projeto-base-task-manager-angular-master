@@ -19,7 +19,7 @@ export class TaskService{
   public getTasks(): Promise<Task[]>{
     let promise = new Promise<Task[]>((resolve, reject) => {
     // funções anonimas: notação arrow (=>) function, seria Promise<Task[]>(function(resolve, reject) {
-        if (TASKS.length > 0){
+      if (TASKS.length > 0){
         resolve(TASKS);
       }else{
         let error_msg = "NAO HA TAREFAS";
@@ -29,4 +29,8 @@ export class TaskService{
     return promise;
   }
 
+  public getImportantTasks(): Promise<Task[]>{
+    return Promise.resolve(TASKS.slice(0, 3))
+  }
+ 
 }

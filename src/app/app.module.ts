@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
+import { TaskService } from './tasks/shared/task.service';
 
 const ROUTES = RouterModule.forRoot([   // forRoot gera um módulo com todas os providers e diretivas de rotas 
   {
@@ -41,7 +42,15 @@ const ROUTES = RouterModule.forRoot([   // forRoot gera um módulo com todas os 
     HttpModule,
     ROUTES        // contém todos os módulos necessários, por isso não é necessário importar RouterModule
   ],
-  providers: [],
+ // providers: [
+    //   { provide: TaskService, useClass: TaskService } // quando alguém perguntar por TaskService (provide),
+    //                                                     // responda com TaskService (useClass)
+    // ]
+    
+    // como provide=useClass, simplifico
+  providers: [
+    TaskService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,11 +10,7 @@ import { TaskService } from './shared/task.service';
 @Component({
     selector: 'tasks',
     templateUrl: './tasks.component.html',
-    // providers: [
-    //   { provide: TaskService, useClass: TaskService } // quando alguém perguntar por TaskService (provide),
-    //                                                     // responda com TaskService (useClass)
-    // ]
-    providers: [ TaskService ]    // como provide=useClass, simplifico
+    // providers: [ TaskService ]    // o provider TaskService está declarado no app.module.ts
 })
 
 export class TasksComponent implements OnInit{
