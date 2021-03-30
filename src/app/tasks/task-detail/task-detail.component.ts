@@ -45,4 +45,16 @@ export class TaskDetailComponent implements OnInit{
     this.location.back();
   }
 
+  public updateTask(task: Task){
+    if(!this.task.title){   // this.task.title verifica se title está presente, ! = negação
+      alert("A tarefa deve ter um título")      
+    }else{
+      this.taskService.updateTask(this.task)
+      .subscribe(
+        () => alert("Tarefa atualizada com sucesso!"),  // não preciso do valor retornado pelo updateTask
+        () => alert("Ocorreu um erro no servidor, tente mais tarde.") // não preciso do valor do erro
+      )
+    }
+  }
+
 }
