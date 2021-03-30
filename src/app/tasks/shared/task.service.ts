@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';   // Injectable é um decorator para
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch'
+import 'rxjs/add/Observable/throw'
 
 import { Task } from './task.model';
 
@@ -15,7 +17,9 @@ export class TaskService{
 
   public getTasks(): Observable<Task[]>{
     return this.http.get(this.tasksURL)
-      .map((response: Response) => response.json().data as Task[]);
+      //.catch((error: Response) => this.handleErrors(error))
+      .catch(this.handleErrors)
+      .map((response: Response) => response.json().data as Task[])
   }
 
   public getImportantTasks(): Observable<Task[]>{
@@ -27,7 +31,13 @@ export class TaskService{
     let url = `${this.tasksURL}/${id}`;
 
     return this.http.get(url)
+      .catch(this.handleErrors)
       .map((response: Response) => response.json().data as Task);
+  }
+
+  private handleErrors(error: Response){
+    console.log("SALVANDO O ERRO NO ARQUIVO DE LOG - DETALHES DO ERRO => ", error);
+    return Observable.throw(error)
   }
  
 }

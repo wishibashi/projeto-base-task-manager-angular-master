@@ -28,15 +28,18 @@ export class TaskDetailComponent implements OnInit{
 
   public ngOnInit(){
     this.route.params
-      .switchMap((params: Params) => this.taskService.getTask(+params['id']))  // no app.module.ts definimos que na rota TaskDetailComponent vai ter um id
-                                                                               // + transforma o string 'params['id'] em number
       // no caso de ter havido muitas requisições 'dominio.com/id', o switchMap cancela todos e mantem apenas a última
       // o getTask retorna Promise<Task>, porém o switchMap transforma esse retorno em Observable<Task>
-      .subscribe(task => this.task = task)  
+      .switchMap((params: Params) => this.taskService.getTask(+params['id']))  // no app.module.ts definimos que na rota TaskDetailComponent vai ter um id
+                                                                               // + transforma o string 'params['id'] em number
       // o operador subscribe é obrigatório, ele é o gatilho para o route.params
       // o subscribe usa o Observable<task> retornado pelo switchMap
       // o subscribe é para o Observable o mesmo que then é para Promise
-  }
+      .subscribe(
+        task => this.task = task,
+        error => alert("Ocorreu um erro no servidor, tente mais tarde.")
+        )  
+    }
 
   public goBack(){
     this.location.back();
