@@ -1,3 +1,25 @@
+<h1>Detalhes da Tarefa: {{ task?.title }}</h1>  <!-- Note a interrogação -->
+
+<div class="form-horizontal" *ngIf="task">
+  <div class="form-group">
+    <label for="title" class="col-sm-2 control-label">Título</label>
+    <div class="col-sm-8">  <!-- col-sm define o tamanho da div do input -->
+      <input [(ngModel)]="task.title" class="form-control" type="text">   <!-- [()] two way data bind -->
+    </div>
+  </div>
+ 
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8"> <!-- col-sm define o tamanho da div do button -->
+      <button type="submit" class="btn btn-success">Salvar</button> <!-- success no bootstrap é um botão verde -->
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Antigo Modal
 <div class="modal fade" id="taskDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" *ngIf="task">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -6,7 +28,7 @@
         <h4 class="modal-title" id="myModalLabel">Detalhes da Tarefa: {{ task.title }}</h4>
       </div>
       <div class="modal-body">
-          <input [(ngModel)]="task.title" class="form-control" type="text">   <!-- [()] two way data bind -->
+          <input [(ngModel)]="task.title" class="form-control" type="text">   
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -15,3 +37,4 @@
     </div>
   </div>
 </div>
+-->
