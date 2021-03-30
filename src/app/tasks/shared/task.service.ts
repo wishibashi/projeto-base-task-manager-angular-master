@@ -32,5 +32,12 @@ export class TaskService{
   public getImportantTasks(): Promise<Task[]>{
     return Promise.resolve(TASKS.slice(0, 3))
   }
+
+  public getTask(id: number): Promise<Task>{
+    return Promise.resolve(TASKS.find(task => task.id === id))
+    // Solução do instrutor
+    // return this.getTasks()
+    //  .then(tasks => tasks.find(task => task.id === id))
+  }
  
 }
