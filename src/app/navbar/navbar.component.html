@@ -14,10 +14,14 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a routerLink="/dashboard">Dashboard</a></li>
+        <li routerLinkActive="active">    <!-- routerLinkActive destaca em cinza o link se corresponte routerLink ativo -->
+          <a routerLink="/dashboard">Dashboard</a>
+        </li>
         <!-- routerLink define href como sendo domínio+routerLink,
         se usarmos [routerLink]="['a', 'b', 'c']" => dominio/a/b/c -->
-        <li><a routerLink="/tasks">Tarefas</a></li> 
+        <li routerLinkActive="active">
+          <a routerLink="/tasks">Tarefas</a>
+        </li> 
       </ul>
 
       <form class="navbar-form navbar-left">
