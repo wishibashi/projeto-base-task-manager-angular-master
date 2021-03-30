@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';   // estou importando os decorators Component e Input
+// import { Component, Input, OnInit } from '@angular/core';   // estou importando os decorators Component e Input
+// Veja abaixo que não utilizaremos mais o Input
+import { Component, OnInit } from '@angular/core';   // estou importando os decorators Component e OnInit
 import { ActivatedRoute, Params } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap'  // adiciona o operador switchMap
@@ -12,7 +14,10 @@ import { TaskService } from '../shared/task.service';
 })
 
 export class TaskDetailComponent implements OnInit{
-  @Input() public task: Task;         // @Input significa que eu posso fazer um binding como parâmetro de entrada para atribuir a propriedade task
+  // @Input() public task: Task;         // @Input significa que eu posso fazer um binding como parâmetro de entrada para atribuir a propriedade task
+  // Retiramos a linha abaixo do tasks.component.html, não precisamos mais do input
+  // <task-detail [task]="selectedTask"></task-detail>   <!-- a propriedade task do task-detail recebe o valor selectedTask -->
+  public task: Task;
 
   public constructor(
     private taskService: TaskService,
