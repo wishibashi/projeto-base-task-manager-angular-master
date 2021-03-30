@@ -2,6 +2,7 @@
 // Veja abaixo que não utilizaremos mais o Input
 import { Component, OnInit } from '@angular/core';   // estou importando os decorators Component e OnInit
 import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common'  // Location já é declarado como provider em ROUTES no app.modules.ts
 
 import 'rxjs/add/operator/switchMap'  // adiciona o operador switchMap
 
@@ -21,7 +22,8 @@ export class TaskDetailComponent implements OnInit{
 
   public constructor(
     private taskService: TaskService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ){}
 
   public ngOnInit(){
@@ -35,4 +37,9 @@ export class TaskDetailComponent implements OnInit{
       // o subscribe usa o Observable<task> retornado pelo switchMap
       // o subscribe é para o Observable o mesmo que then é para Promise
   }
+
+  public goBack(){
+    this.location.back();
+  }
+
 }
