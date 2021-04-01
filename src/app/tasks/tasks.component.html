@@ -1,5 +1,19 @@
 <h1 class="page-header">Lista de Tarefas</h1>
 
+<div class="well">      <!-- well: classe do bootstrap: GRID -->
+    <div class="row">   <!-- Linha do grid -->
+        <div class="col-md-10">     <!-- coluna com 10 unidades. Total de unidades de uma linha do grid=12 -->
+            <!-- no input devo criar um two way bind do conteúdo com o atributo newTask -->
+            <input type="text" class="form-control" [(ngModel)]="newTask.title" placeholder="Digite aqui uma nova tarefa">
+        </div>
+        <div class="col-md-2">  
+            <button class="btn btn-success" (click)="createTask()">
+                Adicionar Tarefa
+            </button> 
+        </div>
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>

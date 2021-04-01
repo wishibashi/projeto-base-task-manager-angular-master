@@ -15,8 +15,8 @@ import { TaskService } from './shared/task.service';
 
 export class TasksComponent implements OnInit{
     public tasks: Array<Task>;
-    public selectedTask: Task;
-
+    public newTask: Task;
+   
     // private taskService: TaskService;
 
     // public constructor(taskService: TaskService){   // no construtor, eu declaro os Serviços que irei importar
@@ -24,8 +24,10 @@ export class TasksComponent implements OnInit{
     // }
 
     // Simplificando o que estava acima:
-    public constructor(private taskService: TaskService){} // typescript permite declarar um atributo privato
+    public constructor(private taskService: TaskService){ // typescript permite declarar um atributo privato
                                                           // associado ao parâmetro do construtor
+        this.newTask = new Task(null, '');
+    }
 
     public ngOnInit(){
       this.taskService.getTasks()   // utilizo o método getTask do serviço taskService
@@ -35,8 +37,21 @@ export class TasksComponent implements OnInit{
         )
     }
 
-    public onSelect(task: Task): void {
-        this.selectedTask = task;
+    public createTask(){
+        this.newTask.title = this.newTask.title.trim(); // trim retira brancos do início e do fim do string, além dos duplicados internamente
+
+        if(!this.newTask.title){
+            alert("A tarefa deve ter um título");
+        }else{
+            this.taskService.createTask(this.newTask)
+                .subscribe(
+                    (task) => {
+                        this.tasks.push(task);  // inserir a tarefa na lista tasks
+                        this.newTask = new Task(null, '');  // após inserir a tarefa, zera o newTask
+                    },
+                    () => alert("Ocorreu um erro no servidor, tente mais tarde.")
+                )
+        }
     }
 
 }
