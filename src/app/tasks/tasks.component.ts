@@ -33,7 +33,7 @@ export class TasksComponent implements OnInit{
       this.taskService.getTasks()   // utilizo o método getTask do serviço taskService
         .subscribe(
             tasks => this.tasks = tasks,
-            error => alert("Ocorreu um erro no servidor, tente mais tarde.")
+            error => alert('Ocorreu um erro no servidor, tente mais tarde.')
         )
     }
 
@@ -41,7 +41,7 @@ export class TasksComponent implements OnInit{
         this.newTask.title = this.newTask.title.trim(); // trim retira brancos do início e do fim do string, além dos duplicados internamente
 
         if(!this.newTask.title){
-            alert("A tarefa deve ter um título");
+            alert('A tarefa deve ter um título');
         }else{
             this.taskService.createTask(this.newTask)
                 .subscribe(
@@ -49,9 +49,18 @@ export class TasksComponent implements OnInit{
                         this.tasks.push(task);  // inserir a tarefa na lista tasks
                         this.newTask = new Task(null, '');  // após inserir a tarefa, zera o newTask
                     },
-                    () => alert("Ocorreu um erro no servidor, tente mais tarde.")
+                    () => alert('Ocorreu um erro no servidor, tente mais tarde.')
                 )
         }
     }
 
+    public deleteTask(task: Task){
+        if(confirm(`Deseja realmente excluir a tarefa "${task.title}"`)) {  // sempre que tiver ${} utilizar a crase `` para delimitar o string
+            this.taskService.deleteTask(task.id)
+            .subscribe(
+                () => this.tasks = this.tasks.filter(t => t !== task),
+                () => alert('Ocorreu um erro no servidor, tente mais tarde.')
+            )
+        }
+    }
 }
