@@ -3,10 +3,6 @@ import { Router } from '@angular/router';
 
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/Observable/of';
 
 import { Task } from 'app/tasks/shared/task.model';
 import { TaskService } from 'app/tasks/shared/task.service';

@@ -23,6 +23,17 @@ import { AppRoutingModule } from './app.routing.module';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api'
 import { InMemoryTaskDataService } from './in-memory-task-data.service'
 
+// rxjs operators adicionados no subscribe
+import 'rxjs/add/operator/catch'
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/switchMap'  // adiciona o operador switchMap
+
+// rxjs extensions acrescidas a classe Observable
+import 'rxjs/add/Observable/of';
+import 'rxjs/add/Observable/throw';
+
 @NgModule({
   declarations: [
     AppComponent,

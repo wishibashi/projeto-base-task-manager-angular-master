@@ -4,8 +4,6 @@ import { Component, OnInit } from '@angular/core';   // estou importando os deco
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common'  // Location já é declarado como provider em ROUTES no app.modules.ts
 
-import 'rxjs/add/operator/switchMap'  // adiciona o operador switchMap
-
 import { Task } from '../shared/task.model'
 import { TaskService } from '../shared/task.service';
 
