@@ -1,11 +1,12 @@
 <div style="position: relative">
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Busca de Tarefas">
+      <!-- #searchInput: cria a variável searchInput que representa toda o elemento html input -->
+      <input #searchInput type="text" (keyup)="search(searchInput.value)" class="form-control" placeholder="Busca de Tarefas">
     </div>
 
     <!-- position: absolute: Não vai esticar a div mãe (navbar) -->
-    <div class="list-group" style="position: absolute; width: 100%; left: 0; top: 35">
-        <a href="#" class="list-group-item">Tarefa 1</a>
+    <div *ngIf="tasks" class="list-group" style="position: absolute; width: 100%; left: 0; top: 35; z-index: 1000">
+        <a *ngFor="let task of tasks" (click)="gotoTask(task)" class="list-group-item" style="cursor: pointer">{{ task.title }}</a>
     </div>
 </div>
 
