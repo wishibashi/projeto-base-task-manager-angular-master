@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/Observable/of';
 
 import { Task } from 'app/tasks/shared/task.model';
@@ -21,11 +23,15 @@ export class TaskSearchComponent implements OnInit {
     public constructor(private taskService: TaskService, private router: Router) {}
 
     public ngOnInit(){
-        this.searchTerms.switchMap(         // switchMap garante que eu vou considerar somente o último acesso ao searchByTitle
-            term => term ? this.taskService.searchByTitle(term) : Observable.of<Task[]>([])    // se o term for vazio, retorna [] 
-        ).subscribe(
-            tasks => this.tasks = tasks
-        )
+        this.searchTerms
+            .debounceTime(300)  // se ocorrer nova tecla antes de 300 ms, pula pro próximo term
+            .distinctUntilChanged() // se o usuário digitou uma palavra, começou a segunda, mas logo apagou, não vai repetir a última busca
+            .switchMap(         // switchMap garante que eu vou considerar somente o último acesso ao searchByTitle
+                term => term ? this.taskService.searchByTitle(term) : Observable.of<Task[]>([])    // se o term for vazio, retorna [] 
+            )
+            .subscribe(
+                tasks => this.tasks = tasks
+            )
     }
 
     public search(term: string) {
