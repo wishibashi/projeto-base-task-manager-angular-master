@@ -30,7 +30,7 @@ export class TaskDetailComponent implements OnInit{
     this.route.params
       // no caso de ter havido muitas requisições 'dominio.com/id', o switchMap cancela todos e mantem apenas a última
       // o getTask retorna Promise<Task>, porém o switchMap transforma esse retorno em Observable<Task>
-      .switchMap((params: Params) => this.taskService.getTask(+params['id']))  // no app.module.ts definimos que na rota TaskDetailComponent vai ter um id
+      .switchMap((params: Params) => this.taskService.getById(+params['id']))  // no app.module.ts definimos que na rota TaskDetailComponent vai ter um id
                                                                                // + transforma o string 'params['id'] em number
       // o operador subscribe é obrigatório, ele é o gatilho para o route.params
       // o subscribe usa o Observable<task> retornado pelo switchMap
@@ -49,7 +49,7 @@ export class TaskDetailComponent implements OnInit{
     if(!this.task.title){   // this.task.title verifica se title está presente, ! = negação
       alert("A tarefa deve ter um título")      
     }else{
-      this.taskService.updateTask(this.task)
+      this.taskService.update(this.task)
       .subscribe(
         () => alert("Tarefa atualizada com sucesso!"),  // não preciso do valor retornado pelo updateTask
         () => alert("Ocorreu um erro no servidor, tente mais tarde.") // não preciso do valor do erro
